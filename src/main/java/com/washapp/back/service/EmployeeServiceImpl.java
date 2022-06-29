@@ -20,7 +20,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 	
 	@Override
-	@Transactional(readOnly = true)
 	public List<Employee> getAllEmployees() {
 		return (List<Employee>) employeeRepository.findAll();
 	}

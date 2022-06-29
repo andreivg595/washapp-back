@@ -19,7 +19,7 @@ public interface EmployeeService {
 	
 	ResponseEntity<Employee> getEmployeeByEmail(String email);
 	
-	ResponseEntity<Employee> updateEmployee(Long id, Employee employeeDetails);
+	ResponseEntity<Employee> updateEmployee(Long id, Employee employee);
 	
 	ResponseEntity<Map<String, Boolean>> deleteEmployee(Long id);
 }

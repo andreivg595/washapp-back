@@ -14,15 +14,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor 
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "employee")
-public class Employee extends AbstractPerson {
+@Table(name = "customer")
+public class Customer extends AbstractPerson {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "nif")
-	private String nif;
+	@Column(name = "phone")
+	private String phone;
 	
-	@Column(name = "ss")
-	private String ss;
+	@Column(name = "city")
+	private String city;
 	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "cp")
+	private String cp;
 }
