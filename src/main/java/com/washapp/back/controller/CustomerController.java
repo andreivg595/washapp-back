@@ -32,14 +32,14 @@ public class CustomerController {
 		return customerService.createCustomer(customer);
 	}
 	
-	@GetMapping("/customers/{id}")
-	public ResponseEntity<Customer> getEmpoyeeById(@PathVariable Long id) {
-		return customerService.getCustomerById(id);
+	@PostMapping("/customers/auth")
+	public ResponseEntity<Customer> authCustomer(@RequestBody Customer customer) {
+		return customerService.authCustomer(customer);
 	}
 	
-	@GetMapping("/customers/{email}")
-	public ResponseEntity<Customer> getEmployeeByEmail(@PathVariable String email) {
-		return customerService.getCustomerByEmail(email);
+	@GetMapping("/customers/id/{id}")
+	public ResponseEntity<Customer> getEmpoyeeById(@PathVariable Long id) {
+		return customerService.getCustomerById(id);
 	}
 	
 	@PutMapping("/customers/{id}")

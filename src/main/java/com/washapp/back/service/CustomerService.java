@@ -14,9 +14,9 @@ public interface CustomerService {
 	
 	Customer createCustomer(Customer customer);
 	
-	ResponseEntity<Customer> getCustomerById(Long id);
+	ResponseEntity<Customer> authCustomer(Customer customer);
 	
-	ResponseEntity<Customer> getCustomerByEmail(String email);
+	ResponseEntity<Customer> getCustomerById(Long id);
 	
 	ResponseEntity<Customer> updateCustomer(Long id, Customer customer);
 }

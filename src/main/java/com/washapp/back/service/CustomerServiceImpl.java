@@ -27,18 +27,18 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
+	public ResponseEntity<Customer> authCustomer(Customer customer) {
+		
+		Customer customerResponse = customerRepository.findByEmailAndPassword(customer.getEmail(), customer.getPassword())
+				.orElseThrow(() -> new ResourceNotFoundException("Customer not exist wrong email or password"));
+		
+		return ResponseEntity.ok(customerResponse);
+	}
+	
+	@Override
 	public ResponseEntity<Customer> getCustomerById(Long id) {
 		
 		Customer customer = findCustomerById(id);
-		
-		return ResponseEntity.ok(customer);
-	}
-
-	@Override
-	public ResponseEntity<Customer> getCustomerByEmail(String email) {
-		
-		Customer customer = customerRepository.findByEmail(email)
-				.orElseThrow(() -> new ResourceNotFoundException("Customer not exist with email : " + email));
 		
 		return ResponseEntity.ok(customer);
 	}

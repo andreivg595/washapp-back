@@ -28,20 +28,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee createEmployee(Employee employee) {
 		return employeeRepository.save(employee);
 	}
+	
+	@Override
+	public ResponseEntity<Employee> authEmployee(Employee employee) {
+		
+		Employee employeeResponse = employeeRepository.findByEmailAndPassword(employee.getEmail(), employee.getPassword())
+				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist wrong email or password"));
+		
+		return ResponseEntity.ok(employeeResponse);
+	}
 
 	@Override
 	public ResponseEntity<Employee> getEmployeeById(Long id) {
 		
 		Employee employee = findEmployeeById(id);
-		
-		return ResponseEntity.ok(employee);
-	}
-
-	@Override
-	public ResponseEntity<Employee> getEmployeeByEmail(String email) {
-		
-		Employee employee = employeeRepository.findByEmail(email)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with email : " + email));
 		
 		return ResponseEntity.ok(employee);
 	}

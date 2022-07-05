@@ -12,5 +12,5 @@ import com.washapp.back.model.Employee;
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	
 	@Transactional(readOnly = true)
-	Optional<Employee> findByEmail(String email);
+	Optional<Employee> findByEmailAndPassword(String email, String password);
 }

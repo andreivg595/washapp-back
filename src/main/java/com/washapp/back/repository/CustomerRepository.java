@@ -12,5 +12,5 @@ import com.washapp.back.model.Customer;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 	
 	@Transactional(readOnly = true)
-	Optional<Customer> findByEmail(String email);
+	Optional<Customer> findByEmailAndPassword(String email, String password);
 }

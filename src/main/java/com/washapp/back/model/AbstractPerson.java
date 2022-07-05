@@ -13,7 +13,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.lang.NonNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,24 +32,20 @@ public abstract class AbstractPerson implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@NonNull
-	@Column(name = "name")
+	@Column(name = "name", nullable = false)
 	private String name;
 	
-	@NonNull
-	@Column(name = "surname")
+	@Column(name = "surname", nullable = false)
 	private String surname;
 	
-	@NonNull
-	@Column(name = "username")
+	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 	
-	@NonNull
-	@Column(name = "email")
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	
-	@NonNull
-	@Column(name = "password")
+	@JsonProperty(access = Access.WRITE_ONLY)
+	@Column(name = "password", nullable = false)
 	private String password;
 	
 	@Column(name = "created_at")

@@ -34,14 +34,14 @@ public class EmployeeController {
 		return employeeService.createEmployee(employee);
 	}
 	
-	@GetMapping("/employees/{id}")
-	public ResponseEntity<Employee> getEmpoyeeById(@PathVariable Long id) {
-		return employeeService.getEmployeeById(id);
+	@PostMapping("/employees/auth")
+	public ResponseEntity<Employee> authEmployee(@RequestBody Employee employee) {
+		return employeeService.authEmployee(employee);
 	}
 	
-	@GetMapping("/employees/{email}")
-	public ResponseEntity<Employee> getEmployeeByEmail(@PathVariable String email) {
-		return employeeService.getEmployeeByEmail(email);
+	@GetMapping("/employees/id/{id}")
+	public ResponseEntity<Employee> getEmpoyeeById(@PathVariable Long id) {
+		return employeeService.getEmployeeById(id);
 	}
 	
 	@PutMapping("/employees/{id}")

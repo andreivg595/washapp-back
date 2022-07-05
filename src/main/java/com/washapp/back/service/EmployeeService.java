@@ -15,9 +15,9 @@ public interface EmployeeService {
 	
 	Employee createEmployee(Employee employee);
 	
-	ResponseEntity<Employee> getEmployeeById(Long id);
+	ResponseEntity<Employee> authEmployee(Employee employee);
 	
-	ResponseEntity<Employee> getEmployeeByEmail(String email);
+	ResponseEntity<Employee> getEmployeeById(Long id);
 	
 	ResponseEntity<Employee> updateEmployee(Long id, Employee employee);
 	
