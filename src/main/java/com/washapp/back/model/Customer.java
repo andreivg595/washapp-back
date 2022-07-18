@@ -1,8 +1,12 @@
 package com.washapp.back.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,4 +34,8 @@ public class Customer extends AbstractPerson {
 	
 	@Column(name = "cp")
 	private String cp;
+	
+	@JsonIgnore
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+	private Cart cart;
 }
