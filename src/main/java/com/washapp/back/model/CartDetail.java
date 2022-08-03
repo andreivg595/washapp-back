@@ -2,12 +2,13 @@ package com.washapp.back.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -18,8 +19,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "cart")
-public class Cart implements Serializable {
+@Table(name = "cartdetail")
+public class CartDetail implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -27,7 +28,14 @@ public class Cart implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@OneToOne
-	@JoinColumn(name = "FK_CUSTOMER", referencedColumnName = "id", nullable = false)
-	private Customer customer;
+	@ManyToOne
+    @JoinColumn(name = "FK_CART", referencedColumnName = "id", nullable = false)
+	private Cart cart;
+	
+	@ManyToOne
+	@JoinColumn(name = "FK_PRODUCT", referencedColumnName = "id", nullable = false)
+	private Product product;
+	
+	@Column(name = "quantity")
+	private long quantity;
 }
