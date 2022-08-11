@@ -28,7 +28,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/customers")
-	public Customer createEmployee(@RequestBody Customer customer) {
+	public Customer createCustomer(@RequestBody Customer customer) {
 		return customerService.createCustomer(customer);
 	}
 	
@@ -38,12 +38,12 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/customers/id/{id}")
-	public ResponseEntity<Customer> getEmpoyeeById(@PathVariable Long id) {
+	public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
 		return customerService.getCustomerById(id);
 	}
 	
 	@PutMapping("/customers/{id}")
-	public ResponseEntity<Customer> updateEmployee(@PathVariable Long id, @RequestBody Customer customer){
+	public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customer){
 		return customerService.updateCustomer(id, customer);
 	}
 	
