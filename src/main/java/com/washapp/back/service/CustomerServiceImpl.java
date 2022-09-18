@@ -3,6 +3,7 @@ package com.washapp.back.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -35,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 	public ResponseEntity<Customer> authCustomer(Customer customer) {
 		Customer customerResponse = findCustomerByEmail(customer.getEmail());
 		boolean matches = passwordEncoder.matches(customer.getPassword(), customerResponse.getPassword());
-		return matches ? ResponseEntity.ok(customerResponse) : ResponseEntity.noContent().build();
+		return matches ? ResponseEntity.ok(customerResponse) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 	
 	@Override
@@ -62,10 +63,10 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	private Customer findCustomerById(Long id) {
-		return customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not exist with id : " + id));		
+		return customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer not exist with id: " + id));		
 	}
 	
 	private Customer findCustomerByEmail(String email) {
-		return customerRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Customer not exist wrong email : " + email));
+		return customerRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Customer not exist wrong email: " + email));
 	}
 }

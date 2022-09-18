@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -38,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public ResponseEntity<Employee> authEmployee(Employee employee) {
 		Employee employeeResponse = findEmployeeByEmail(employee.getEmail());
 		boolean matches = passwordEncoder.matches(employee.getPassword(), employeeResponse.getPassword());
-		return matches ? ResponseEntity.ok(employeeResponse) : ResponseEntity.noContent().build();
+		return matches ? ResponseEntity.ok(employeeResponse) : ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 
 	@Override
@@ -74,10 +75,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	private Employee findEmployeeById(Long id) {
-		return employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id : " + id));		
+		return employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));		
 	}
 	
 	private Employee findEmployeeByEmail(String email) {
-		return employeeRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Customer not exist wrong email : " + email));
+		return employeeRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Customer not exist wrong email: " + email));
 	}
 }
