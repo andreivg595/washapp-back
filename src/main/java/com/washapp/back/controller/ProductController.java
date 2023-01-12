@@ -28,12 +28,12 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/products")
-	public List<Product> listEmployees() {
+	public List<Product> listProducts() {
 		return productService.getAllProducts();
 	}
 
 	@PostMapping("/products")
-	public Product createEmployee(@RequestPart("body") Product product, @RequestPart("imageFile") MultipartFile file) {
+	public Product createProduct(@RequestPart("body") Product product, @RequestPart("imageFile") MultipartFile file) {
 		return productService.createProduct(product, file);
 	}
 
@@ -45,7 +45,7 @@ public class ProductController {
 
 	@PutMapping("/products/{id}")
 	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestPart("body") Product product,
-			@RequestPart("imageFile") MultipartFile file) {
+			@RequestPart(value = "imageFile", required = false) MultipartFile file) {
 		return productService.updateProduct(id, product, file);
 	}
 

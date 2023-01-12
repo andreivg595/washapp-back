@@ -74,7 +74,9 @@ public class ProductServiceImpl implements ProductService {
 		productToUpdate.setType(product.getType());
 		
 		try {
-			productToUpdate.setImage(compressBytes(file.getBytes()));
+			if (file != null) {				
+				productToUpdate.setImage(compressBytes(file.getBytes()));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

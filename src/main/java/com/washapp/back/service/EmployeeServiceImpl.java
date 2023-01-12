@@ -56,6 +56,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeToUpdate.setSurname(employee.getSurname());
 		employeeToUpdate.setUsername(employee.getUsername());
 		employeeToUpdate.setEmail(employee.getEmail());
+		employeeToUpdate.setNif(employee.getNif());
+		employeeToUpdate.setSs(employee.getSs());
 		
 		boolean matches = passwordEncoder.matches(employee.getPassword(), employeeToUpdate.getPassword());
 		if (!matches) employeeToUpdate.setPassword(passwordEncoder.encode(employee.getPassword()));
