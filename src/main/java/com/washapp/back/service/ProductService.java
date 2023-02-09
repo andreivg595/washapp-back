@@ -12,7 +12,7 @@ import com.washapp.back.model.Product;
 @Service
 public interface ProductService {
 
-	List<Product> getAllProducts();
+	List<Product> getProducts(Integer type);
 	
 	Product createProduct(Product product, MultipartFile file);
 	

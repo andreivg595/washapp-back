@@ -25,9 +25,15 @@ public class ProductServiceImpl implements ProductService {
 	private ProductRepository productRepository;
 
 	@Override
-	public List<Product> getAllProducts() {
+	public List<Product> getProducts(Integer type) {
 
-		List<Product> products = (List<Product>) productRepository.findAll();
+		List<Product> products;
+
+		if (type != null) {
+			products = (List<Product>) productRepository.findByType(type);
+		} else {
+			products = (List<Product>) productRepository.findAll();
+		}
 
 		for (Product product : products) {
 			product.setImage(decompressBytes(product.getImage()));
@@ -56,46 +62,46 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ResponseEntity<Product> getProductById(Long id) {
-		
+
 		Product product = findEmployeeById(id);
-		
+
 		product.setImage(decompressBytes(product.getImage()));
-		
+
 		return ResponseEntity.ok(product);
 	}
 
 	@Override
 	public ResponseEntity<Product> updateProduct(Long id, Product product, MultipartFile file) {
-		
+
 		Product productToUpdate = findEmployeeById(id);
-		
+
 		productToUpdate.setName(product.getName());
 		productToUpdate.setPrice(product.getPrice());
 		productToUpdate.setType(product.getType());
-		
+
 		try {
-			if (file != null) {				
+			if (file != null) {
 				productToUpdate.setImage(compressBytes(file.getBytes()));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		productRepository.save(productToUpdate);
-		
+
 		return ResponseEntity.ok(productToUpdate);
 	}
 
 	@Override
 	public ResponseEntity<Map<String, Boolean>> deleteProduct(Long id) {
-		
+
 		Product product = findEmployeeById(id);
-		
+
 		productRepository.delete(product);
-		
+
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
-		
+
 		return ResponseEntity.ok(response);
 	}
 

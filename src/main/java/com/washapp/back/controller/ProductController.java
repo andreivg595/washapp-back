@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,9 +29,15 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 
+//	@GetMapping("/products")
+//	public List<Product> listProducts() {
+//		return productService.getAllProducts();
+//	}
+
 	@GetMapping("/products")
-	public List<Product> listProducts() {
-		return productService.getAllProducts();
+	@ResponseBody
+	public List<Product> listProducts(@RequestParam(name = "type", required = false) Integer type) {
+		return productService.getProducts(type);
 	}
 
 	@PostMapping("/products")
